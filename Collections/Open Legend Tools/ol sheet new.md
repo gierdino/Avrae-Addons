@@ -1,0 +1,1 @@
+create a new empty character. Currently overwrites olchar with a blank character.

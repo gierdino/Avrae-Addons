@@ -1,0 +1,3 @@
+embed {{inp="&*&"}} -desc "Whoops, you might have written some incomplete or misplaced command. You wrote:
+```!ol {{inp}}```"
+-footer "For more help, try !ol help"

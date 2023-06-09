@@ -1,0 +1,20 @@
+embed -desc "{{inp="&*&" if "&*&" else "0"}}{{inpcont=inp.split("#", 1)}}{{inpcomm="" if len(inpcont)<2 else inpcont[1]}}
+{{a=inpcont[0].split(" ")}}{{a.remove("") if "" in a else ""}}
+{{a.append(0) if len(a)<1 else ""}}{{a[0] = 0 if a[0] is "" else a[0]}}
+{{a.append(0) if len(a)<2 else ""}}
+{{a.append(0) if len(a)<3 else ""}}
+{{att, adv, dtran=int(a[0]), int(a[1]), a[2]}}
+{{hilow="kh" if adv>=0 else "kl"}}
+{{mainpool=1 if att>0 else 1 if adv==0 else 2}}
+{{attpool=0 if att==0 else 1 if att>0 and att<=4 else 2 if att>4 and att<8 else 3 if att>=8 and att<10 else 4}}
+{{advattpool=attpool+adv if adv>=0 else attpool-adv}}
+{{dicenum=0 if att==0 else 2+(att*2) if (att>0 and att<=4) else (att*2)-4 if (att>4 and att<8) else (att*2)-8 if (att>=8 and att<10) else 8 if att>=10 else 0}}
+{{exp = f"e{dicenum}e{dicenum-1}" if dtran=="d" else f"e{dicenum}" }}
+{{d20max="20e19" if dtran=="d" else "20"}}
+{{rollstring = f"{mainpool}d20{hilow}1e{d20max}+{advattpool}d{dicenum}{hilow}{attpool}{exp}" if att>0 else f"{mainpool}d20{hilow}1e{d20max}"}}
+{{f"Attribute **{att}**"}} 
+{{"Advantage" if adv>=0 else "Disadvantage"}}{{f" **{adv}**" if adv>=0 else f" **{0-adv}**"}}{{"\n**Destructive Trance!**" if dtran=="d" else ""}}{{result=vroll(rollstring)}}{{plcalc= floor((result.total-10)/2)}}
+{{pl=att if plcalc>att else plcalc if result.total>10 else "0"}}
+{{f"{result}"}}
+{{f"`PL {pl}`"}}
+{{f"\n{inpcomm}" if inpcomm is not "" else ""}}" -footer "Open Legend Dice Roller v0.8 by Nagamerah."

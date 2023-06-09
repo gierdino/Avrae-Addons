@@ -1,0 +1,1 @@
+All the open legend commands start with this prefix

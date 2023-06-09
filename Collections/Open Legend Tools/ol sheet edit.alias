@@ -1,0 +1,30 @@
+embed -title "
+{{edtblstring=['name','desc','pic','notes','archetype'] }}
+{{edtblint=['lv','guard','toughness','resolve','maxhp','speed','initiative'] }}
+{{edtblatt=['agility','fortitude','might','learning','logic','perception','will','deception','persuasion','presence','alteration','creation','energy','entropy','influence','movement','prescience','protection'] }}
+{{edtblpt=['ap','xp','lp','wp','wl'] }}
+{{edtbl=edtblstring+edtblint+edtblatt+edtblpt}}
+
+{{edin="&*&"}}
+{{edin=edin.split(" ", 1)}}
+{{edin.append(0) if len(edin)<1 else ""}}
+{{edin.append(0) if len(edin)<2 else ""}}
+
+{{char=load_json(olchar)[0]}}
+<drac2>
+ckey,cval=edin[0],edin[1]
+if ckey in edtbl:
+ if ckey in edtblstring:
+  char[ckey]=cval
+ if ckey in edtblint:
+  char[ckey]=int(cval)
+ if ckey in edtblatt:
+  char['attribute'][0][ckey]=int(cval)
+ if ckey in edtblpt:
+  char['point'][0][ckey]=int(cval)
+else:
+ ckey=0
+</drac2>
+{{"Nothing selected to be edited." if ckey is 0 else f"{ckey} value is now {cval}."}}
+{{"" if ckey is 0 else set_uvar("olchar",dump_json([char]))}}"
+-desc "{{f"Editable fields include: {edtbl}\n\nExample:\n`!ol sheet edit name Fenris Nyctimus`\n`!ol sheet edit agility 5`\n`!ol sheet edit pic https://cdn.discordapp.com/attachments/404633089252524034/614441061040783361/JPEG_20190823_195022.jpg`\n\nTo modify other fields that are not listed here such as perks and feats, see `!ol sheet add.`" if ckey is 0 else "Use `!ol sheet full` to see changes."}}" -footer "Open Legend Tools by Nagamerah"
