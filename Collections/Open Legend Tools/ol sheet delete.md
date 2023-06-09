@@ -1,0 +1,1 @@
+deletes the selected save slot

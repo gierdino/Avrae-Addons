@@ -1,0 +1,19 @@
+embed -title "
+{{char=[{"name": "New Character", "ver": 3, "time": round(time()), "lv": 1, "point": [{"ap": 0, "xp": 0, "lp": 0, "wp": 0, "wl": 2}], "archetype":"Basic Character", "desc": "Example description of your character.", "pic": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", "guard": 10, "toughness": 10, "resolve": 10, "hp": 10, "maxhp": 10, "lethal": 0, "initiative": 0, "speed": 30, "attribute": [{"agility": 0, "fortitude": 0, "might": 0, "learning": 0, "logic": 0, "perception": 0, "will": 0, "deception": 0, "persuasion": 0, "presence": 0, "alteration": 0, "creation": 0, "energy": 0, "entropy": 0, "influence": 0, "movement": 0, "prescience": 0, "protection": 0}], "condition": [], "feat": [], "perk": [], "flaw": [], "item": [], "log": [], "action": [{"name": "Example Action", "desc": "This is an example of your action description. You use this as a shortcut to one of your attacks, defends, boons, banes, skill checks, etc. along with the appropriate builtin advantages.\n\n To edit your character's roll for this attack, you can do something like `!ol sheet edit action 1 cmd 5 2` to create an action with Attribute 5 Advantage 2. See `!ol sheet edit action` for details and examples.", "tag": "Example Tag 1, Example Tag 2.", "cmd": "0 0"}], "notes": ""}] }}
+{{set_uvar_nx("olchar", dump_json([]))}}
+{{set_uvar_nx("olcharsave", dump_json([]))}}
+{{charsave=load_json(olcharsave) }}
+{{actchar=load_json(olchar) }}
+<drac2>if actchar: actchar[0]["time"]=round(time()) </drac2>
+{{charsave.append(actchar[0]) if len(actchar)>0 else ""}}
+{{set_uvar("olcharsave",dump_json(charsave) )}}
+{{set_uvar("olchar",dump_json(char) )}}
+
+New empty character created! 
+" -desc "
+Your active character (if any) is automatically saved to an empty slot.
+
+You can view your character with `!ol sheet` or `!ol sheet full`
+
+For the full list of commands, type `!ol help`
+" -footer "{{f"Open Legend Tool by Nagamerah" }}"

@@ -1,0 +1,1 @@
+Edit fields in the character sheet. Shows all the edit commands.

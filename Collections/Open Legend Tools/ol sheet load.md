@@ -1,0 +1,1 @@
+load a selected slot in 'olcharsave' into 'olchar'

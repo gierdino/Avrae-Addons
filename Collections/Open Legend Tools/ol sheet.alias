@@ -1,0 +1,32 @@
+embed -title "{{inpchar=load_json(olchar)}}{{inpchar[0]["name"]}}"
+-desc "**HP:** {{inpchar[0]["hp"]}}/{{inpchar[0]["maxhp"]}} ({{inpchar[0]["lethal"]}} Lethal)
+**Guard: ** {{inpchar[0]["guard"]}}{{"\t "}}**Toughness: ** {{inpchar[0]["toughness"]}}{{"\t "}}**Resolve: ** {{inpchar[0]["resolve"]}}
+<drac2>
+p = ""
+tp=['condition']
+for a in tp:
+ p = p+"**"+a.capitalize()+"**: "
+ count=1
+ if len(inpchar[0][a])<1:
+  p = p+"None"
+ for b in inpchar[0][a]:
+  p = p+"`"+b+"`"
+  if count<len(inpchar[0][a]):
+   p = p+", "
+ count = count+1
+ p = p+"\n"
+return p
+</drac2>
+**Actions**
+<drac2>
+p = ""
+count=1
+for a in inpchar[0]["action"]:
+ act=a.cmd.split(" ",2)
+ while len(act)<3: act.append(0)
+ p = p+count+") "+a.name+" - `"+act[0]+" (+"+act[1]+")`\n"
+ count = count+1
+return p
+</drac2>
+" -thumb {{inpchar[0]["pic"]}}
+-footer "Open Legend Character Sheet v0.{{inpchar[0]["ver"]}} by Nagamerah/Bro G."

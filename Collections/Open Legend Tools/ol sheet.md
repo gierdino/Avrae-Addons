@@ -1,0 +1,1 @@
+Various commands regarding your open legend character sheet. Shows the sheet in a condensed format.

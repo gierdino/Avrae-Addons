@@ -1,0 +1,1 @@
+(unfinished) a feature to load open legend characters that's saved to a server

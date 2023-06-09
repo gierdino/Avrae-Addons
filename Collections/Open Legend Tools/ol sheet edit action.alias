@@ -1,0 +1,34 @@
+embed -title "
+{{edtbl=['name','desc','tag','cmd']}}
+
+{{edin="&*&" if "&*&" else "0"}}
+{{edin=edin.split(" ", 2)}}
+{{while len(edin)<3: edin.append(0)}}
+
+{{char=load_json(olchar)[0]}}
+<drac2>
+indx,ckey,cval=int(edin[0]),edin[1],edin[2]
+if ckey =='cmd':
+ strc=str(cval).split(" ")
+ while len(strc)<2: strc.append("0")
+ " ".join(strc)
+ char["action"][indx-1][ckey]=strc
+if ckey in edtbl and cval is not 0:
+ char["action"][indx-1][ckey]=cval
+else:
+ ckey=0
+</drac2>
+{{"No proper action is selected." if ckey is 0 or cval is 0 else f"Action {ckey} is now {cval}."}}
+{{"" if ckey is 0 or cval is 0 else set_uvar("olchar",dump_json([char]))}}"
+-desc "{{f"Editable fields include: {edtbl}\n\nExample:\n`!ol sheet edit action 1 name Swordflash!`\n`!ol sheet edit action 1 tag Attack Specialization II (Sword)`\n`!ol sheet edit action 1 cmd 5 2`" if ckey is 0 else "Use `!ol sheet full` to see changes."}}
+
+**Actions:**
+<drac2>
+p = ""
+count=1
+for a in char["action"]:
+ p = p+count+") "+a.name+"\n"
+ count = count+1
+return p
+</drac2>
+" -footer "Open Legend Tools by Nagamerah"

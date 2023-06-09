@@ -1,0 +1,21 @@
+embed -title "
+{{chars=load_json(olcharsave)}}
+{{charslen=len(chars)}}
+{{inp="&*&" if "&*&" else str(charslen)}}
+{{a=inp.split(" ")}}{{a.remove("") if "" in a else ""}}
+{{a.append(0) if len(a)<1 else ""}}{{a[0] = 0 if a[0] is "" else a[0]}}
+{{slot=int(a[0])}}
+{{inpchar=load_json(olchar)}}
+{{inpchar[0]["time"]=round(time())}}
+{{chars.append(inpchar[0])}}
+{{set_uvar("olcharsave",dump_json(chars))}}
+{{inpchar[0]["name"]}} saved to Slot {{slot+1}}"
+-desc "<drac2>
+p = ""
+count=1
+for a in chars:
+ p = p+count+") "+a.name+" - `"+a.time+"`\n"
+ count = count+1
+return p
+</drac2>" -footer "Open Legend Tools by Nagamerah"
+-thumb {{inpchar[0]["pic"]}}

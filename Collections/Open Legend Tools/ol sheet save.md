@@ -1,0 +1,1 @@
+Saves the current active 'olchar' data into slots in 'olcharsave'

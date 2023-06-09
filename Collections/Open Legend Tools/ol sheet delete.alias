@@ -1,0 +1,18 @@
+embed -title "
+{{chars=load_json(olcharsave)}}
+{{charslen=len(chars)}}
+{{a=&ARGS&}}
+{{a.append("0") if len(a)<1 else ""}}
+{{slot=int(a[0])}}
+{{inpchar="" if slot is 0 else chars.pop(slot-1)}}
+{{"No character selected to delete." if slot is 0 else f"{inpchar['name']} deleted from Slot {slot}"}}
+{{"" if slot is 0 else set_uvar("olcharsave",dump_json(chars))}}"
+-desc "<drac2>
+p = ""
+count=1
+for a in chars:
+ p = p+count+") "+a.name+" - `"+a.time+"`\n"
+ count = count+1
+return p
+</drac2>" -footer "Open Legend Tools by Nagamerah"
+-thumb {{"" if slot is 0 else inpchar["pic"]}}
